@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat Support — StressDetect</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand"><div class="brand-icon">SD</div><span class="brand-name">StressDetect</span></div>
+  <div class="nav-links">
+    <a href="/" class="nav-link">Home</a><a href="/dashboard" class="nav-link">Dashboard</a>
+    <a href="/psychologists" class="nav-link">Doctors</a>
+    <a href="/resources" class="nav-link">Resources</a>
+    <a href="/chat" class="nav-link active">Chat</a>
+  </div>
+</nav>
+
+<div class="chat-layout">
+  <!-- Sidebar -->
+  <div class="chat-sidebar">
+    <div class="sidebar-header"><h3>Support Chat</h3></div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Quick Actions</div>
+      <button class="sidebar-btn" onclick="sendQuick('Show me psychologists in Islamabad')">🏥 Find doctors near me</button>
+      <button class="sidebar-btn" onclick="sendQuick('I want to book an appointment')">📅 Book appointment</button>
+      <button class="sidebar-btn" onclick="sendQuick('Recommend some stress management books')">📚 Recommend books</button>
+      <button class="sidebar-btn" onclick="sendQuick('I am feeling very stressed and anxious right now')">💬 Talk about stress</button>
+      <button class="sidebar-btn" onclick="sendQuick('Show me my bookings')">🗓 My appointments</button>
+    </div>
+    <div class="sidebar-section" style="margin-top:auto">
+      <div class="sidebar-label">Session Memory</div>
+      <div class="memory-note">Conversations are remembered for 7 days to provide better support.</div>
+    </div>
+  </div>
+
+  <!-- Chat Window -->
+  <div class="chat-main">
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-welcome">
+        <div class="welcome-avatar">🤝</div>
+        <div class="welcome-text">
+          <strong>Hello! I'm your stress support assistant.</strong><br>
+          I can help you understand your stress, find professional psychologists, or recommend resources. How are you feeling today?
+        </div>
+      </div>
+    </div>
+
+    <!-- Typing indicator -->
+    <div class="typing-indicator hidden" id="typing">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- Psychologist cards panel (injected by JS) -->
+    <div class="chat-cards hidden" id="chat-cards"></div>
+
+    <!-- Input -->
+    <div class="chat-input-bar">
+      <textarea id="chat-input" placeholder="Type your message..." rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChatMessage()}"
+        oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"></textarea>
+      <button class="btn-primary chat-send-btn" id="chat-send-btn" onclick="sendChatMessage()">Send</button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/app.js"></script>
+<script src="/static/js/chat.js"></script>
+</body>
+</html>

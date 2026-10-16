@@ -1,0 +1,74 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — StressDetect</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand"><div class="brand-icon">SD</div><span class="brand-name">StressDetect</span></div>
+  <div class="nav-links">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/dashboard" class="nav-link active">Dashboard</a>
+    <a href="/psychologists" class="nav-link">Doctors</a>
+    <a href="/resources" class="nav-link">Resources</a>
+    <a href="/chat" class="nav-link">Chat</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1>Your Dashboard</h1>
+    <p>Track your stress patterns over time</p>
+  </div>
+</div>
+
+<div class="container" style="padding-top:2rem;padding-bottom:4rem">
+  <!-- Summary Cards -->
+  <div class="summary-grid" id="summary-grid">
+    <div class="summary-card">
+      <div class="summary-icon" style="background:rgba(127,119,221,0.12)">📊</div>
+      <div class="summary-info"><div class="summary-val" id="avg-score">—</div><div class="summary-label">Avg Stress Score</div></div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon" style="background:rgba(216,90,48,0.12)">🔥</div>
+      <div class="summary-info"><div class="summary-val" id="peak-score">—</div><div class="summary-label">Peak Stress</div></div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon" style="background:rgba(29,158,117,0.12)">✅</div>
+      <div class="summary-info"><div class="summary-val" id="sessions-count">—</div><div class="summary-label">Sessions (7 days)</div></div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon" style="background:rgba(186,117,23,0.12)">💙</div>
+      <div class="summary-info"><div class="summary-val" id="dominant-emo">—</div><div class="summary-label">Most Common Emotion</div></div>
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <div class="card" style="margin-top:1.5rem">
+    <div class="card-header"><h3>Stress History</h3><span class="card-sub">Last 7 days</span></div>
+    <div class="chart-wrap" id="chart-wrap">
+      <canvas id="stress-chart"></canvas>
+    </div>
+    <div class="empty-state hidden" id="chart-empty">
+      <div class="empty-icon">📈</div>
+      <div>No stress history yet.</div>
+      <a href="/" class="btn-primary" style="margin-top:1rem;display:inline-block">Analyze Now</a>
+    </div>
+  </div>
+
+  <!-- Bookings -->
+  <div class="card" style="margin-top:1.5rem">
+    <div class="card-header"><h3>My Appointments</h3><a href="/psychologists" class="btn-sm">Book New</a></div>
+    <div id="bookings-list"><div class="loading-spinner"></div></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script src="/static/js/app.js"></script>
+<script src="/static/js/dashboard.js"></script>
+</body>
+</html>

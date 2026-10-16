@@ -1,0 +1,97 @@
+<!-- psychologists.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Psychologists — StressDetect</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand"><div class="brand-icon">SD</div><span class="brand-name">StressDetect</span></div>
+  <div class="nav-links">
+    <a href="/" class="nav-link">Home</a><a href="/dashboard" class="nav-link">Dashboard</a>
+    <a href="/psychologists" class="nav-link active">Doctors</a>
+    <a href="/resources" class="nav-link">Resources</a><a href="/chat" class="nav-link">Chat</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1>Find a Psychologist</h1>
+    <p>Verified mental health professionals across Pakistan — view ratings, fees, and book appointments</p>
+  </div>
+</div>
+
+<div class="container" style="padding-top:1.5rem;padding-bottom:4rem">
+  <!-- Filters -->
+  <div class="filter-bar">
+    <div class="filter-group">
+      <label>City</label>
+      <select id="filter-city" onchange="filterDoctors()">
+        <option value="">All Cities</option>
+        <option value="Islamabad">Islamabad</option>
+        <option value="Lahore">Lahore</option>
+        <option value="Karachi">Karachi</option>
+        <option value="Faisalabad">Faisalabad</option>
+        <option value="Multan">Multan</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Max Fee (PKR)</label>
+      <select id="filter-fee" onchange="filterDoctors()">
+        <option value="">Any</option>
+        <option value="2000">Up to 2,000</option>
+        <option value="3000">Up to 3,000</option>
+        <option value="4000">Up to 4,000</option>
+        <option value="5000">Up to 5,000</option>
+        <option value="6000">Up to 6,000</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Online Available</label>
+      <select id="filter-online" onchange="filterDoctors()">
+        <option value="">Any</option>
+        <option value="true">Online Only</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Sort By</label>
+      <select id="filter-sort" onchange="filterDoctors()">
+        <option value="rating">Highest Rating</option>
+        <option value="fee_asc">Lowest Fee</option>
+        <option value="experience">Most Experience</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="results-bar"><span id="results-count">Loading...</span></div>
+  <div class="doctors-grid" id="doctors-grid"><div class="loading-spinner"></div></div>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal-overlay hidden" id="booking-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Book Appointment</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-psych-info" id="modal-psych-info"></div>
+      <div class="slot-picker">
+        <h4>Select Date & Time</h4>
+        <div id="slot-list"><div class="loading-spinner"></div></div>
+      </div>
+      <div class="form-group" style="margin-top:1rem">
+        <label>Notes (optional)</label>
+        <textarea id="booking-notes" placeholder="Any specific concerns or preferences..." rows="3"></textarea>
+      </div>
+      <button class="btn-primary full-w" id="confirm-booking-btn" onclick="confirmBooking()" disabled>Confirm Appointment</button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/app.js"></script>
+<script src="/static/js/psychologists.js"></script>
+</body>
+</html>

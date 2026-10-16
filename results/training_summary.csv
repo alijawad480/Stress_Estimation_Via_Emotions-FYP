@@ -1,0 +1,16 @@
+model_name,fusion,best_val_loss,elapsed_sec,checkpoint
+SelfMM,cross_modal,0.0853295773267746,309.69549655914307,/content/drive/MyDrive/checkpoints/SelfMM_cross_modal_best.keras
+SelfMM,late,0.08737751841545105,288.1057460308075,/content/drive/MyDrive/checkpoints/SelfMM_late_best.keras
+SelfMM,early,0.08813171833753586,250.10882997512817,/content/drive/MyDrive/checkpoints/SelfMM_early_best.keras
+MFN,cross_modal,0.09275083243846893,446.4769220352173,/content/drive/MyDrive/checkpoints/MFN_cross_modal_best.keras
+LMF,late,0.09319291263818741,147.25835847854614,/content/drive/MyDrive/checkpoints/LMF_late_best.keras
+MulT,late,0.09396753460168839,134.24740862846375,/content/drive/MyDrive/checkpoints/MulT_late_best.keras
+LMF,early,0.09408047795295715,151.59651732444763,/content/drive/MyDrive/checkpoints/LMF_early_best.keras
+MFN,late,0.09410104900598526,470.7723217010498,/content/drive/MyDrive/checkpoints/MFN_late_best.keras
+TFN,late,0.09451361745595932,145.96885466575623,/content/drive/MyDrive/checkpoints/TFN_late_best.keras
+MulT,cross_modal,0.09476041048765182,203.75685214996338,/content/drive/MyDrive/checkpoints/MulT_cross_modal_best.keras
+LMF,cross_modal,0.09496642649173737,158.83504843711853,/content/drive/MyDrive/checkpoints/LMF_cross_modal_best.keras
+MFN,early,0.09519872814416885,157.07767724990845,/content/drive/MyDrive/checkpoints/MFN_early_best.keras
+MulT,early,0.09618110954761505,136.3532633781433,/content/drive/MyDrive/checkpoints/MulT_early_best.keras
+TFN,cross_modal,0.09837432205677032,173.83219957351685,/content/drive/MyDrive/checkpoints/TFN_cross_modal_best.keras
+TFN,early,0.09872856736183167,170.14803004264832,/content/drive/MyDrive/checkpoints/TFN_early_best.keras

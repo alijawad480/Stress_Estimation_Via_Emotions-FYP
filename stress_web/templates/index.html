@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StressDetect — Multimodal Stress Detection</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<!-- ── Navigation ──────────────────────────────────────────────────────────── -->
+<nav class="navbar">
+  <div class="nav-brand">
+    <div class="brand-icon">SD</div>
+    <span class="brand-name">StressDetect</span>
+  </div>
+  <div class="nav-links">
+    <a href="/"             class="nav-link active">Home</a>
+    <a href="/dashboard"    class="nav-link">Dashboard</a>
+    <a href="/psychologists"class="nav-link">Doctors</a>
+    <a href="/resources"    class="nav-link">Resources</a>
+    <a href="/chat"         class="nav-link">Chat</a>
+  </div>
+  <button class="btn-primary nav-cta" onclick="document.getElementById('analyze-section').scrollIntoView({behavior:'smooth'})">Try Now</button>
+</nav>
+
+<!-- ── Hero ──────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">AI-Powered · Multimodal · Private</div>
+    <h1 class="hero-title">Understand Your<br><span class="gradient-text">Stress Levels</span></h1>
+    <p class="hero-subtitle">Analyze stress from text, voice, or video using advanced deep learning. Get personalized support, resources, and connect with professional psychologists.</p>
+    <div class="hero-actions">
+      <button class="btn-primary btn-lg" onclick="document.getElementById('analyze-section').scrollIntoView({behavior:'smooth'})">Analyze My Stress</button>
+      <a href="/dashboard" class="btn-outline btn-lg">View Dashboard</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-n">6</span><span class="stat-l">Emotions Tracked</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-n">3</span><span class="stat-l">Input Modalities</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-n">13</span><span class="stat-l">Expert Doctors</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="stress-orb" id="hero-orb">
+      <div class="orb-ring r1"></div>
+      <div class="orb-ring r2"></div>
+      <div class="orb-ring r3"></div>
+      <div class="orb-center">
+        <div class="orb-score">—</div>
+        <div class="orb-label">stress</div>
+      </div>
+    </div>
+    <div class="emotion-pills" id="emotion-pills">
+      <div class="pill" data-emotion="anger">Anger</div>
+      <div class="pill" data-emotion="fear">Fear</div>
+      <div class="pill" data-emotion="happy">Happy</div>
+      <div class="pill" data-emotion="sad">Sad</div>
+      <div class="pill" data-emotion="surprise">Surprise</div>
+      <div class="pill" data-emotion="disgust">Disgust</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Analyze Section ─────────────────────────────────────────────────────── -->
+<section class="section" id="analyze-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Analyze Your Stress</h2>
+      <p>Choose an input method below</p>
+    </div>
+
+    <div class="tab-bar">
+      <button class="tab active" data-tab="text" onclick="switchTab('text')">
+        <span class="tab-icon">✍</span> Text
+      </button>
+      <button class="tab" data-tab="audio" onclick="switchTab('audio')">
+        <span class="tab-icon">🎤</span> Voice
+      </button>
+      <button class="tab" data-tab="video" onclick="switchTab('video')">
+        <span class="tab-icon">📹</span> Video
+      </button>
+    </div>
+
+    <!-- Text Tab -->
+    <div class="tab-panel active" id="tab-text">
+      <div class="input-card">
+        <textarea id="text-input" placeholder="Type how you're feeling, describe a recent stressful situation, or just express your thoughts... The AI will analyze the emotional content and stress level." rows="5"></textarea>
+        <div class="input-footer">
+          <span class="char-count" id="char-count">0 / 500</span>
+          <button class="btn-primary" id="text-analyze-btn" onclick="analyzeText()">
+            <span class="btn-text">Analyze Text</span>
+            <span class="btn-loader hidden">Analyzing...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audio Tab -->
+    <div class="tab-panel" id="tab-audio">
+      <div class="input-card upload-card">
+        <div class="upload-area" id="audio-drop" onclick="document.getElementById('audio-file').click()">
+          <div class="upload-icon">🎙</div>
+          <div class="upload-title">Upload or Record Audio</div>
+          <div class="upload-sub">Supported: .wav .mp3 .m4a (max 20MB)</div>
+          <div class="upload-filename" id="audio-filename"></div>
+        </div>
+        <input type="file" id="audio-file" accept=".wav,.mp3,.m4a,.ogg" class="hidden" onchange="handleAudioFile(this)">
+        <div class="record-controls">
+          <button class="btn-outline" id="record-btn" onclick="toggleRecording()">🎙 Start Recording</button>
+          <span class="record-timer hidden" id="record-timer">0:00</span>
+        </div>
+        <button class="btn-primary full-w" id="audio-analyze-btn" onclick="analyzeAudio()" disabled>Analyze Voice</button>
+      </div>
+    </div>
+
+    <!-- Video Tab -->
+    <div class="tab-panel" id="tab-video">
+      <div class="input-card upload-card">
+        <div class="upload-area" id="video-drop" onclick="document.getElementById('video-file').click()">
+          <div class="upload-icon">🎬</div>
+          <div class="upload-title">Upload Video</div>
+          <div class="upload-sub">Supported: .mp4 .mov .avi (max 50MB)<br>Both facial expressions and audio will be analyzed.</div>
+          <div class="upload-filename" id="video-filename"></div>
+        </div>
+        <input type="file" id="video-file" accept=".mp4,.mov,.avi,.webm" class="hidden" onchange="handleVideoFile(this)">
+        <button class="btn-primary full-w" id="video-analyze-btn" onclick="analyzeVideo()" disabled>Analyze Video</button>
+      </div>
+    </div>
+
+    <!-- Results Panel -->
+    <div class="result-panel hidden" id="result-panel">
+      <div class="result-header">
+        <div class="result-score-wrap">
+          <div class="result-gauge" id="result-gauge">
+            <svg viewBox="0 0 120 70" class="gauge-svg">
+              <path class="gauge-bg" d="M10,65 A55,55 0 0,1 110,65" stroke-linecap="round"/>
+              <path class="gauge-fill" id="gauge-path" d="M10,65 A55,55 0 0,1 110,65" stroke-linecap="round" stroke-dasharray="0 173"/>
+            </svg>
+            <div class="gauge-value" id="gauge-value">0.00</div>
+            <div class="gauge-label" id="gauge-label">Low</div>
+          </div>
+        </div>
+        <div class="result-meta">
+          <div class="result-dominant" id="result-dominant">Dominant: —</div>
+          <div class="result-label badge" id="result-label">—</div>
+          <div class="result-note hidden" id="result-note"></div>
+        </div>
+      </div>
+      <div class="emotion-bars" id="emotion-bars"></div>
+      <div class="result-actions">
+        <button class="btn-primary" onclick="window.location='/chat'">💬 Get Support</button>
+        <button class="btn-outline"  onclick="window.location='/psychologists'">👨‍⚕️ Find Doctor</button>
+        <button class="btn-outline"  onclick="window.location='/resources'">📚 Resources</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Features ───────────────────────────────────────────────────────────── -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2>How It Works</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(127,119,221,0.12);color:#7F77DD">🧠</div>
+        <h3>AI-Powered Analysis</h3>
+        <p>Our deep learning model (SelfMM) analyzes text, audio, and video to detect 6 emotions and compute a precise stress score using Russell's Circumplex Model.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(29,158,117,0.12);color:#1D9E75">💾</div>
+        <h3>Smart Memory</h3>
+        <p>Your stress history is securely stored for 7 days, allowing the AI to track patterns and provide context-aware support in every session.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(186,117,23,0.12);color:#BA7517">👨‍⚕️</div>
+        <h3>Expert Doctors</h3>
+        <p>Connect with verified psychologists in Islamabad, Lahore, Karachi, Faisalabad, and Multan. View ratings, fees, and book appointments online.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(216,90,48,0.12);color:#D85A30">📚</div>
+        <h3>Curated Resources</h3>
+        <p>Access expert-recommended books, free online courses, YouTube channels, and blogs for stress management and mental wellbeing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="brand-icon small">SD</div>
+        <span>StressDetect</span>
+      </div>
+      <p class="footer-note">This tool is for awareness and educational purposes only. It does not replace professional medical advice.</p>
+      <div class="footer-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/psychologists">Doctors</a>
+        <a href="/resources">Resources</a>
+        <a href="/chat">Chat</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!-- resources.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources — StressDetect</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand"><div class="brand-icon">SD</div><span class="brand-name">StressDetect</span></div>
+  <div class="nav-links">
+    <a href="/" class="nav-link">Home</a><a href="/dashboard" class="nav-link">Dashboard</a>
+    <a href="/psychologists" class="nav-link">Doctors</a>
+    <a href="/resources" class="nav-link active">Resources</a><a href="/chat" class="nav-link">Chat</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1>Mental Health Resources</h1>
+    <p>Curated books, courses, and blogs to help you manage stress</p>
+  </div>
+</div>
+
+<div class="container" style="padding-top:2rem;padding-bottom:4rem">
+  <div class="resources-tab-bar">
+    <button class="res-tab active" onclick="showResTab('books',this)">📚 Books</button>
+    <button class="res-tab" onclick="showResTab('tutorials',this)">🎓 Courses & Tutorials</button>
+    <button class="res-tab" onclick="showResTab('blogs',this)">✍ Blogs</button>
+  </div>
+  <div id="resources-content"><div class="loading-spinner"></div></div>
+</div>
+
+<script src="/static/js/app.js"></script>
+<script src="/static/js/resources.js"></script>
+</body>
+</html>
